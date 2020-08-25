@@ -8,7 +8,7 @@ class TiaSpider(scrapy.Spider):
     query = "jQuery1113006309494415150874_1598346608683"
     cur_page = 1
     page_count = 19800 / 200
-    # page_count = 2
+    page_count = 1
     url = "http://comp-sync.webapp.163.com/x11/sync_paged_list?callback={}&game=x11&page={}&per_page=200&_=1598346608684".format(query, cur_page)
     start_urls = [url]
 
@@ -50,12 +50,12 @@ class TiaSpider(scrapy.Spider):
                 timestamp = int(time.mktime(time_array))
 
                 str_from = js_data_list[i]['prop_info']['from']
-                if "一阶通用装备" in str_from:
-                    continue
-                if "一阶专属装备" in str_from:
-                    continue
-                if "二阶通用装备" in str_from:
-                    continue
+                # if "一阶通用装备" in str_from:
+                #     continue
+                # if "一阶专属装备" in str_from:
+                #     continue
+                # if "二阶通用装备" in str_from:
+                #     continue
 
                 get_info = js_data_list[i]['prop_info']['from']
                 tia_info = get_time + ' ' + server + ' ' + server_name + ' ' + get_info

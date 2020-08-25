@@ -39,13 +39,6 @@ def get_timestamp(get_time):
     timestamp = int(time.mktime(time_array))
     return timestamp
 
-def parse_book(book):
-    if "技能" in book:
-        for idx in wushi_book:
-            if idx in book:
-                wushi.append(book)
-                return
-
 with open("data.txt", "r", encoding='utf-8') as f:
     line = f.readline()
     while line:
