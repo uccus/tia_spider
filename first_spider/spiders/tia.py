@@ -5,11 +5,11 @@ import time
 class TiaSpider(scrapy.Spider):
     name = 'tia'
     allowed_domains = ['tia.163.com']
-    query = "jQuery1113006309494415150874_1598346608683"
+    query = "jQuery1113036974047365985174_1598365119749"
     cur_page = 1
     page_count = 19800 / 200
-    page_count = 1
-    url = "http://comp-sync.webapp.163.com/x11/sync_paged_list?callback={}&game=x11&page={}&per_page=200&_=1598346608684".format(query, cur_page)
+    page_count = 3
+    url = "http://comp-sync.webapp.163.com/x11/sync_paged_list?game=x11&page={}&per_page=200".format(cur_page)
     start_urls = [url]
 
     # full_url = http://comp-sync.webapp.163.com/x11/sync_paged_list?callback=jQuery1113002454624774459524_1598321053695game=x11&page=1per_page=200&_=1598321053696
@@ -22,15 +22,16 @@ class TiaSpider(scrapy.Spider):
         self.cur_page += 1
         if self.cur_page > self.page_count:
             return None
-        url = "http://comp-sync.webapp.163.com/x11/sync_paged_list?callback={}&game=x11&page={}&per_page=200&_=1598321053696".format(self.query, self.cur_page)
+        url = "http://comp-sync.webapp.163.com/x11/sync_paged_list?game=x11&page={}&per_page=200".format(self.cur_page)
         return url
  
     def parse(self, response):
         data = response.xpath("//*/body/p//text()").extract()
-        data = data[0][len(self.query) + 1:]
-        data = data[:-1]
+        # print(data)
+        # data = data[0][len(self.query) + 1:]
+        # data = data[:-1]
         
-        self.parse_json(data)
+        self.parse_json(data[0])
         url = self.get_nexturl()
         if url == None:
             print("over")
@@ -50,12 +51,12 @@ class TiaSpider(scrapy.Spider):
                 timestamp = int(time.mktime(time_array))
 
                 str_from = js_data_list[i]['prop_info']['from']
-                # if "一阶通用装备" in str_from:
-                #     continue
-                # if "一阶专属装备" in str_from:
-                #     continue
-                # if "二阶通用装备" in str_from:
-                #     continue
+                if "一阶通用装备" in str_from:
+                    continue
+                if "一阶专属装备" in str_from:
+                    continue
+                if "二阶通用装备" in str_from:
+                    continue
 
                 get_info = js_data_list[i]['prop_info']['from']
                 tia_info = get_time + ' ' + server + ' ' + server_name + ' ' + get_info
