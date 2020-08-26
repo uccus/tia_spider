@@ -1,4 +1,5 @@
 import sys
+import getopt
 import time
 
 ll_book = []    # 低阶初级
@@ -14,17 +15,9 @@ pet     = []    # 宠物
 gift    = []    # 馈赠
 other   = []
 
-wushi   = {}
-zhanshi = {}
-qishi   = {}
-fashi   = {}
-saman   = {}
-mushi   = {}
-qiang   = {}
-cike    = {}
-lieren  = {}
+wushi,zhanshi,qishi,fashi,saman,mushi,qiang,lieren,cike   = [],[],[],[],[],[],[],[],[]
 
-wushi_book = ["追踪","静默之刃","连续打击","影遁","敏锐","闪现刺杀"]
+wushi_book = ["影遁","静默之刃","连续打击","追踪","敏锐","闪现刺杀"]
 zhanshi_book = ["野蛮","跃击","愤怒","投掷","振奋"]
 qishi_book = ["减速光环","冷静","信仰守护","圣光治愈","盾击","圣光之盾"]
 fashi_book = ["火球","火焰枷锁","变形","霜爆","焦土","连锁闪电"]
@@ -69,60 +62,86 @@ with open("data.txt", "r", encoding='utf-8') as f:
         line = f.readline()
 
 tgt_book = lm_book
-dict_book = {}
+list_book = []
 
 for book in tgt_book:
     if not "111" in book:
         continue
     get_time = book[:19]
     timestamp = get_timestamp(get_time)
-    dict_book[timestamp] = book
+    list_book.append((timestamp, book))
 
     if "技能" in book:
         for idx in wushi_book:
-            if idx in book:
-                wushi[timestamp] = book
+            if idx in book and not (timestamp, book) in wushi:
+                wushi.append((timestamp,book))
                 continue
         for idx in zhanshi_book:
-            if idx in book:
-                zhanshi[timestamp] = book
+            if idx in book and not (timestamp, book) in zhanshi:
+                zhanshi.append((timestamp,book))
                 continue
         for idx in qishi_book:
-            if idx in book:
-                qishi[timestamp] = book
+            if idx in book and not (timestamp, book) in qishi:
+                qishi.append((timestamp,book))
                 continue
         for idx in fashi_book:
-            if idx in book:
-                fashi[timestamp] = book
+            if idx in book and not (timestamp, book) in fashi:
+                fashi.append((timestamp,book))
                 continue
         for idx in mushi_book:
-            if idx in book:
-                mushi[timestamp] = book
+            if idx in book and not (timestamp, book) in mushi:
+                mushi.append((timestamp,book))
                 continue
         for idx in saman_book:
-            if idx in book:
-                saman[timestamp] = book
+            if idx in book and not (timestamp, book) in saman:
+                saman.append((timestamp,book))
                 continue
         for idx in qiang_book:
-            if idx in book:
-                qiang[timestamp] = book
+            if idx in book and not (timestamp, book) in qiang:
+                qiang.append((timestamp,book))
                 continue
         for idx in lieren_book:
-            if idx in book:
-                lieren[timestamp] = book
+            if idx in book and not (timestamp, book) in lieren:
+                lieren.append((timestamp,book))
                 continue
         for idx in cike_book:
-            if idx in book:
-                cike[timestamp] = book
+            if idx in book and not (timestamp, book) in cike:
+                cike.append((timestamp,book))
                 continue
     # print(book)
 
-for i in sorted(cike):
-    print(cike[i])
+if __name__ == "__main__":
+    zhiye = ''
+    opts,args = getopt.getopt(sys.argv[1:],'-h-w-z-q-f-s-m-Q-l-c-v',['help','version'])
+    for opt_name,opt_value in opts:
+        if opt_name in ('-h','--help'):
+            print("Help info")
+            exit()
+        if opt_name in ('-v','--version'):
+            print("The current Version is v1.0 ")
+            exit()
+        if opt_name in ('-w'):
+            zhiye = wushi
+        elif opt_name in ('-z'):
+            zhiye = zhanshi
+        elif opt_name in ('-q'):
+            zhiye = qishi
+        elif opt_name in ('-f'):
+            zhiye = fashi
+        elif opt_name in ('-s'):
+            zhiye = saman
+        elif opt_name in ('-m'):
+            zhiye = mushi
+        elif opt_name in ('-Q'):
+            zhiye = qiang
+        elif opt_name in ('-l'):
+            zhiye = lieren
+        elif opt_name in ('-c'):
+            zhiye = cike
+        else:
+            print("help info")
 
-# for i in sorted(dict_book):
-#     print(dict_book[i])
+    for book in sorted(zhiye, key=lambda book_info: book_info[0]):
+        print(book[1])
 
-# print(tgt_book[1])
-# print(len(tgt_book))
-# print(len(dict_book))
+    pass
