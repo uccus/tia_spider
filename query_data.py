@@ -117,7 +117,25 @@ def query_all():
 
 
 def help_info():
-    print("help_info")
+    print("====================help_info====================")
+    print("          -a 查看当前轮所有职业剩余书籍")
+    print("          -w 查看当前轮武士剩余书籍")
+    print("          -z 查看当前轮战士剩余书籍")
+    print("          -q 查看当前轮战士剩余书籍")
+    print("          -f 查看当前轮武士剩余书籍")
+    print("          -s 查看当前轮战士剩余书籍")
+    print("          -m 查看当前轮战士剩余书籍")
+    print("          -Q 查看当前轮武士剩余书籍")
+    print("          -l 查看当前轮战士剩余书籍")
+    print("          -c 查看当前轮战士剩余书籍")
+    print("          -L 查看当前轮低阶书籍")
+    print("          -M 查看当前轮中阶书籍")
+    print("          -H 查看当前轮高阶书籍")
+    print("          -P 查看当前轮低级书籍")
+    print("          -I 查看当前轮中级书籍")
+    print("          -S 查看当前轮高级书籍")
+    print("          --all 查看当前所有物品")
+    print("          --allbook 查看当前所有书籍")
     pass
 
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ class TiaSpider(scrapy.Spider):
     allowed_domains = ['tia.163.com']
     cur_page = 1
     # page_count = 19800 / 200
-    page_count = 5
+    page_count = 8
     url = "http://comp-sync.webapp.163.com/x11/sync_paged_list?game=x11&page={}&per_page=200".format(cur_page)
     start_urls = [url]
     conn = sqlite3.connect("tia.db")
