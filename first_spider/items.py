@@ -10,4 +10,5 @@ class FirstSpiderItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     info = scrapy.Field()
+    award_info = scrapy.Field()
     pass

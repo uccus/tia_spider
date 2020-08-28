@@ -2,24 +2,19 @@ import scrapy
 import json
 import time
 import sqlite3
+from first_spider.items import FirstSpiderItem
 
 class TiaSpider(scrapy.Spider):
     name = 'tia'
     allowed_domains = ['tia.163.com']
     cur_page = 1
     # page_count = 19800 / 200
-    page_count = 8
+    page_count = 1
     url = "http://comp-sync.webapp.163.com/x11/sync_paged_list?game=x11&page={}&per_page=200".format(cur_page)
     start_urls = [url]
     conn = sqlite3.connect("tia.db")
     c = conn.cursor()
     latest_time = (0, "")
-
-    # full_url = http://comp-sync.webapp.163.com/x11/sync_paged_list?callback=jQuery1113002454624774459524_1598321053695game=x11&page=1per_page=200&_=1598321053696
-    # for i in range(0, 1):
-    #     url = "http://comp-sync.webapp.163.com/x11/sync_paged_list?callback={}&game=x11&page={}&per_page=200&_=1598321053696".format(query, cur_page)
-    #     start_urls.append(url)
-    #     cur_page += 1
 
     def get_nexturl(self):
         self.cur_page += 1
@@ -29,9 +24,11 @@ class TiaSpider(scrapy.Spider):
         return url
  
     def parse(self, response):
+        item = FirstSpiderItem()
         data = response.xpath("//*/body/p//text()").extract()
-        
-        self.parse_json(data[0])
+        item['award_info'] = data[0]
+        yield item
+        # self.parse_json(data[0])
         url = self.get_nexturl()
         if url == None:
             print("over")

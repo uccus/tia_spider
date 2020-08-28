@@ -5,4 +5,4 @@
 
 # spiders
 # import spiders.tia.TiaSpider as TiaSpider
-__all__ = ['tia', 'tia.TiaSpider']
+__all__ = ['tia', 'tia.TiaSpider', 'test', 'test.TestSpider']

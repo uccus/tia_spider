@@ -28,16 +28,31 @@ def pre_parse_data(zhiye_flag, book_prefix, book_suffix):
     zhiye_def, zhiye_book, zhiye_des = [], [], []
     str_filter = ""
 
+    # 确定查看职业
+    if zhiye_flag == 0:
+        zhiye_book = tia_data.zhiye_book
+        zhiye_des = tia_data.zhiye_des
+    else:
+        zhiye_book.append(tia_data.zhiye_book[zhiye_flag - 1])
+        zhiye_des.append(tia_data.zhiye_des[zhiye_flag - 1])
+
     # 确定职业书籍
     if book_prefix == 0:
         if zhiye_flag == 0:
             zhiye_def = tia_data.zhiye_def_l
-            zhiye_book = tia_data.zhiye_book
-            zhiye_des = tia_data.zhiye_des
         else:
             zhiye_def.append(tia_data.zhiye_def_l[zhiye_flag - 1])
-            zhiye_book.append(tia_data.zhiye_book[zhiye_flag - 1])
-            zhiye_des.append(tia_data.zhiye_des[zhiye_flag - 1])
+    elif book_prefix == 1:
+        if zhiye_flag == 0:
+            zhiye_def = tia_data.zhiye_def_m
+        else:
+            zhiye_def.append(tia_data.zhiye_def_m[zhiye_flag - 1])
+    elif book_prefix == 2:
+        if zhiye_flag == 0:
+            zhiye_def = tia_data.zhiye_def_h
+        else:
+            zhiye_def.append(tia_data.zhiye_def_h[zhiye_flag - 1])
+    # print(zhiye_def)
 
     # 确定过滤字段
     if book_prefix == 0 and book_suffix == 0:

@@ -38,7 +38,7 @@ cike_book_m       = ["暗器散射","雾霾","暗影之舞","潜行术","交换"
 lieren_book_m     = ["变熊","野性激发","剧毒标枪","绝望之囚","自然视野","箭猪"]
 
 # 嗜血？割喉？突袭？窒息之刃？铁钩？真空？进攻光环?地震
-wushi_book_h      = ["闪电护盾","穿刺风暴","割裂","幻影斩击","遁地突刺",""]
+wushi_book_h      = ["闪电护盾","穿刺风暴","割裂","幻影斩击","遁地突刺"]
 zhanshi_book_h    = ["挥击","神的力量","烧灼","毁灭","岩石皮肤"]
 qishi_book_h      = ["圣光守护","惩戒","钢铁意志","圣光驱散","神盾"]
 fashi_book_h      = ["暴风雪","寒冰咆哮","寒冬","流星火雨"]
@@ -49,3 +49,5 @@ cike_book_h       = ["突袭","多重影袭","割喉","窒息之刃","毒瘴","�
 lieren_book_h     = ["寒冰标枪","白熊","狮吼","铁钩","掩护","变豹"]
 
 zhiye_def_l = [wushi_book_l, zhanshi_book_l, qishi_book_l, fashi_book_l, saman_book_l, mushi_book_l, qiang_book_l, lieren_book_l, cike_book_l]
+zhiye_def_m = [wushi_book_m, zhanshi_book_m, qishi_book_m, fashi_book_m, saman_book_m, mushi_book_m, qiang_book_m, lieren_book_m, cike_book_m]
+zhiye_def_h = [wushi_book_h, zhanshi_book_h, qishi_book_h, fashi_book_h, saman_book_h, mushi_book_h, qiang_book_h, lieren_book_h, cike_book_h]
