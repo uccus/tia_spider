@@ -17,17 +17,17 @@ class FirstSpiderPipeline:
     latest_time = (0, "")
 
     def open_spider(self, spider):
-        self.conn = sqlite3.connect("tia.db")
-        self.c = conn.cursor()
+        # self.conn = sqlite3.connect("tia.db")
+        # self.c = conn.cursor()
         pass
 
     def close_spider(self, spider):
-        self.conn.close()
+        # self.conn.close()
         pass
 
     def process_item(self, item, spider):
         # print(item["award_info"])
-        parse_json(item['award_info'])
+        # parse_json(item['award_info'])
         return item
 
     def parse_json(self, data):
