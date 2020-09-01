@@ -18,8 +18,8 @@ class TiaSpider(scrapy.Spider):
 
     def get_nexturl(self):
         self.cur_page += 1
-        if self.cur_page > self.page_count:
-            return None
+        # if self.cur_page > self.page_count:
+        #     return None
         url = "http://comp-sync.webapp.163.com/x11/sync_paged_list?game=x11&page={}&per_page=200".format(self.cur_page)
         return url
  
@@ -28,15 +28,17 @@ class TiaSpider(scrapy.Spider):
         data = response.xpath("//*/body/p//text()").extract()
         # item['award_info'] = data[0]
         # yield item
-        self.parse_json(data[0])
-        url = self.get_nexturl()
-        if url == None:
-            print("over")
-            return
-        yield scrapy.Request(url, callback=self.parse, dont_filter=True)
+        need_next = self.parse_json(data[0])
+        if need_next:
+            url = self.get_nexturl()
+            if url == None:
+                print("over")
+                return
+            yield scrapy.Request(url, callback=self.parse, dont_filter=True)
         pass
 
     def parse_json(self, data):
+        need_next = False
         js_data = json.loads(data)
         js_data_list = js_data['data']
 
@@ -51,6 +53,7 @@ class TiaSpider(scrapy.Spider):
             timestamp = int(time.mktime(time_array))
             if timestamp > self.latest_time[0]:
                 self.latest_time = (timestamp, get_time)
+                need_next = True
 
             str_from = js_data_list[i]['prop_info']['from']
             if "一阶通用装备" in str_from:
@@ -67,6 +70,7 @@ class TiaSpider(scrapy.Spider):
 
         self.c.execute("COMMIT")
         print("最后更新时间: " + self.latest_time[1])
+        return need_next
 
     def save_data(self, get_time, data):
         time_array = time.strptime(get_time, "%Y-%m-%d %H:%M:%S")
