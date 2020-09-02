@@ -17,7 +17,7 @@ zhiye_des = ["武士","战士","骑士","法师","萨满","牧师","枪手","猎
 wushi,zhanshi,qishi,fashi,saman,mushi,qiang,lieren,cike   = [],[],[],[],[],[],[],[],[]
 zhiye_book = [wushi,zhanshi,qishi,fashi,saman,mushi,qiang,lieren,cike]
 
-# 减速光环=聚焦
+# 减速光环=聚焦 镇定光环=洁净
 wushi_book_l      = ["影遁","静默之刃","连续打击","追踪","敏锐","闪现刺杀"]
 zhanshi_book_l    = ["野蛮掠夺","野蛮反击","跃击","愤怒","投掷","振奋"]
 qishi_book_l      = ["减速光环","冷静","信仰守护","圣光治愈","盾击","圣光之盾"]

@@ -18,8 +18,8 @@ class TiaSpider(scrapy.Spider):
 
     def get_nexturl(self):
         self.cur_page += 1
-        # if self.cur_page > self.page_count:
-        #     return None
+        if self.cur_page > self.page_count:
+            return None
         url = "http://comp-sync.webapp.163.com/x11/sync_paged_list?game=x11&page={}&per_page=200".format(self.cur_page)
         return url
  
@@ -29,7 +29,7 @@ class TiaSpider(scrapy.Spider):
         # item['award_info'] = data[0]
         # yield item
         need_next = self.parse_json(data[0])
-        if need_next:
+        if True:
             url = self.get_nexturl()
             if url == None:
                 print("over")
