@@ -76,7 +76,7 @@ def begin_parse_data(zhiye_def, zhiye_book, zhiye_des, str_filter):
     print(str_filter)
     for book in sorted(all_books, key=lambda books: books[0]):
         book_des = book[1]
-        if not "111" in book_des:
+        if not "107" in book_des:
             continue
         # if "三阶专属" in book_des:
         #     print (book_des)
