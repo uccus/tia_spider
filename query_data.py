@@ -80,7 +80,7 @@ def begin_parse_data(zhiye_def, zhiye_book, zhiye_des, str_filter):
         # continue
         if not "107" in book_des:
             continue
-        # if "四阶通用" in book_des:
+        # if "三阶专属" in book_des:
         #     print (book_des)
         if G.query_all:
             print(book_des)
