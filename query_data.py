@@ -65,8 +65,14 @@ def pre_parse_data(zhiye_flag, book_prefix, book_suffix):
         str_filter = "中阶初级"
     elif book_prefix == 1 and book_suffix == 1:
         str_filter = "中阶中级"
+    elif book_prefix == 1 and book_suffix == 2:
+        str_filter = "中阶高级"
     elif book_prefix == 2 and book_suffix == 0:
         str_filter = "高阶初级"
+    elif book_prefix == 2 and book_suffix == 1:
+        str_filter = "高阶中级"
+    elif book_prefix == 2 and book_suffix == 2:
+        str_filter = "高阶高级"
 
     begin_parse_data(zhiye_def, zhiye_book, zhiye_des, str_filter)
     pass
@@ -92,7 +98,7 @@ def begin_parse_data(zhiye_def, zhiye_book, zhiye_des, str_filter):
             continue
         for i in range(0, len(zhiye_def)):
             for book_def in zhiye_def[i]:
-                if book_def in book_des:
+                if book_def in book_des[-15:]:
                     zhiye_book[i].append(book_des)
                     break
     
@@ -101,9 +107,14 @@ def begin_parse_data(zhiye_def, zhiye_book, zhiye_des, str_filter):
             query_left(zhiye_book[i], zhiye_def[i], zhiye_des[i])
 
 def query_left(some_books, defs, des):
+    idx, total = 0, 0
     for book in some_books:
         if G.should_print:
+            idx = idx + 1
             print(book)
+            if idx % 6 == 0:
+                total = total + 1
+                print("第 {} 轮--------------------------------------------------------------------------".format(total + 1))
 
     left = len(some_books) % 6
     if left > 0:
