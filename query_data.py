@@ -5,11 +5,15 @@ import sqlite3
 import tia_data
 
 class G:
-    common = True
+    common = True           # 普通查询(技能书)
     should_print = False
     query_all = False
     query_all_just_book = False
     query_all_zhiye = False
+    tz = False              # 三专
+    tt = False              # 三通
+    fz = False              # 四专
+    ft = False              # 四通
 
 def get_timestamp(get_time):
     time_array = time.strptime(get_time, "%Y-%m-%d %H:%M:%S")
@@ -86,11 +90,22 @@ def begin_parse_data(zhiye_def, zhiye_book, zhiye_des, str_filter):
         # continue
         if not "107" in book_des:
             continue
-        # if "三阶专属" in book_des:
-        #     print (book_des)
         if G.query_all:
             print(book_des)
             continue
+        if G.tz and "三阶专属" in book_des:
+            print(book_des)
+            continue
+        if G.tt and "三阶通用" in book_des:
+            print(book_des)
+            continue
+        if G.fz and "四阶专属" in book_des:
+            print(book_des)
+            continue
+        if G.ft and "四阶通用" in book_des:
+            print(book_des)
+            continue
+
         if not str_filter in book_des:
             continue
         if G.query_all_just_book:
@@ -171,7 +186,7 @@ def help_info():
 if __name__ == "__main__":
     book_prefix, book_suffix, zhiye_flag = 0, 0, 0
 
-    opts,args = getopt.getopt(sys.argv[1:],'-a-w-z-q-f-s-m-Q-l-c-L-M-H-P-I-S-h-p',["all","allbook"])
+    opts,args = getopt.getopt(sys.argv[1:],'-a-w-z-q-f-s-m-Q-l-c-L-M-H-P-I-S-h-p',["all","allbook","tz","tt","ft","fz"])
     for opt_name,opt_value in opts:
         if opt_name in ('-h'):
             help_info()
@@ -215,6 +230,18 @@ if __name__ == "__main__":
             G.common = False
         elif opt_name in ('--allbook'):
             G.query_all_just_book = True
+            G.common = False
+        elif opt_name in ('--tz'):
+            G.tz = True
+            G.common = False
+        elif opt_name in ('--tt'):
+            G.tt = True
+            G.common = False
+        elif opt_name in ('--fz'):
+            G.fz = True
+            G.common = False
+        elif opt_name in ('--ft'):
+            G.ft = True
             G.common = False
 
     pre_parse_data(zhiye_flag, book_prefix, book_suffix)

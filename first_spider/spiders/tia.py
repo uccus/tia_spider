@@ -2,14 +2,13 @@ import scrapy
 import json
 import time
 import sqlite3
-from first_spider.items import FirstSpiderItem
 
 class TiaSpider(scrapy.Spider):
     name = 'tia'
     allowed_domains = ['tia.163.com']
     cur_page = 1
     # page_count = 19800 / 200
-    page_count = 10
+    page_count = 15
     url = "http://comp-sync.webapp.163.com/x11/sync_paged_list?game=x11&page={}&per_page=200".format(cur_page)
     start_urls = [url]
     conn = sqlite3.connect("tia.db")
@@ -24,18 +23,13 @@ class TiaSpider(scrapy.Spider):
         return url
  
     def parse(self, response):
-        # item = FirstSpiderItem()
         data = response.xpath("//*/body/p//text()").extract()
-        # item['award_info'] = data[0]
-        # yield item
         need_next = self.parse_json(data[0])
-        if True:
-            url = self.get_nexturl()
-            if url == None:
-                print("over")
-                return
-            yield scrapy.Request(url, callback=self.parse, dont_filter=True)
-        pass
+        url = self.get_nexturl()
+        if url == None:
+            print("over")
+            return
+        yield scrapy.Request(url, callback=self.parse, dont_filter=True)
 
     def parse_json(self, data):
         need_next = False
