@@ -140,7 +140,7 @@ def begin_parse_data(zhiye_keywords, output_data, zhiye_name, str_filter):
             count = count + 1
             if not G.za:
                 # 为数据贴上职业标签
-                name = "----"
+                name = "---- ----"
                 for keywords in zhiye_keywords:
                     for keyword in keywords:
                         if keyword in single_data[-15:]:
