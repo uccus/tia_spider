@@ -37,6 +37,7 @@ class TiaSpider(scrapy.Spider):
         js_data_list = js_data['data']
 
         self.c.execute("BEGIN TRANSACTION")
+        count = 0
         for i in range(0, len(js_data_list)):
             get_time = js_data_list[i]['get_time']
             server = js_data_list[i]['user_info']['server']
@@ -50,6 +51,7 @@ class TiaSpider(scrapy.Spider):
                 need_next = True
 
             str_from = js_data_list[i]['prop_info']['from']
+            count += 1
             if "一阶通用装备" in str_from:
                 continue
             if "一阶专属装备" in str_from:
@@ -64,7 +66,7 @@ class TiaSpider(scrapy.Spider):
             self.save_data(get_time, tia_info)
 
         self.c.execute("COMMIT")
-        print("cur_page: {}, 最后更新时间: {}".format(self.cur_page, self.latest_time[1]))
+        print("count: {}, cur_page: {}, 最后更新时间: {}".format(count, self.cur_page, self.latest_time[1]))
         return need_next
 
     def save_data(self, get_time, data):

@@ -128,6 +128,22 @@ def begin_parse_data(zhiye_keywords, output_data, zhiye_name, str_filter):
         # 服务器过滤
         if not "107" in single_data:
             continue
+        # 自定义
+        # if not "三阶专属" in single_data:
+            # continue
+        # if not "天" in single_data:
+            # continue
+        # print(single_data)
+        # continue
+        # if not "上古" in single_data:
+            # continue
+        # print(single_data)
+        # if not "远古" in single_data:
+        #     continue
+        # print(single_data)
+        # if not "古神" in single_data:
+        #     continue
+        # print(single_data)
         # 查询所有物品
         if G.query_everything:
             print(single_data)
@@ -135,6 +151,12 @@ def begin_parse_data(zhiye_keywords, output_data, zhiye_name, str_filter):
         # 根据过滤字段过滤
         if not str_filter in single_data:
             continue
+        # 中中时间过滤
+        if str_filter == "中阶中级" and data[0] <= 1605112398:
+            continue 
+        # 低中时间过滤
+        if str_filter == "低阶中级" and data[0] <= 1605801600:
+            continue 
         # 显示过滤后所有开出物品
         if G.query_all:
             count = count + 1
@@ -159,7 +181,7 @@ def begin_parse_data(zhiye_keywords, output_data, zhiye_name, str_filter):
                 print(name, single_data)
                 if count % 54 == 0:
                     total = total + 1
-                    print("第 {} 轮--------------------------------------------------------------------------".format(total + 1))
+                    # print("第 {} 轮--------------------------------------------------------------------------".format(total + 1))
             else:
                 for keyword in zhiye_keywords:
                     if keyword in single_data:

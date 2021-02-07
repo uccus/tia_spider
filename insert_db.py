@@ -9,11 +9,11 @@ def get_timestamp(get_time):
 conn = sqlite3.connect("tia.db")
 c = conn.cursor()
 
-# timestamp = get_timestamp("2020-09-16 20:00:00")
-# print(timestamp)
-# str_sql = "INSERT INTO Tia VALUES (1600257600, '2020-09-16 20:00:00 107 107 test 打开 三阶专属装备 获得:符纹靴');"
-str_sql = "INSERT INTO Tia VALUES (1596988800, '2020-08-10 00:00:00 107 107 test 打开 高阶初级技能 获得:初级割裂技能书');"
-# str_sql = "INSERT INTO Tia VALUES (1600948800, '2020-09-24 20:00:00 107 107 test 打开 高阶初级技能 获得:初级治疗光波技能书');"
-c.execute(str_sql)
-conn.commit()
-conn.close()
+timestamp = get_timestamp("2020-08-02 06:00:00")
+print(timestamp)
+# str_sql = "INSERT INTO Tia VALUES (1609947900, '2021-01-06 23:45:00 107 107 test 打开 三阶专属装备 获得:硬皮护胫');"
+str_sql = "INSERT INTO Tia VALUES (1596319200, '2020-08-02 22:00:00 107 107 test 打开 低阶高级技能 获得:高级导弹技能书');"
+# str_sql = "INSERT INTO Tia VALUES (1611266400, '2021-01-22 06:00:00 107 107 test 打开 四阶通用装备 获得:弯月弓');"
+# c.execute(str_sql)
+# conn.commit()
+# conn.close()
